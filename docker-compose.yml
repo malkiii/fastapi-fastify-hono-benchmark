@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  fastapi:
+    container_name: fastapi
+    build:
+      context: ./servers/fastapi
+    ports:
+      - '${FASTAPI_PORT}:${FASTAPI_PORT}'
+    environment:
+      - FASTAPI_PORT=${FASTAPI_PORT}
+
+  fastify:
+    container_name: fastify
+    build:
+      context: ./servers/fastify
+    ports:
+      - '${FASTIFY_PORT}:${FASTIFY_PORT}'
+    environment:
+      - FASTIFY_PORT=${FASTIFY_PORT}
+
+  hono:
+    container_name: hono
+    build:
+      context: ./servers/hono
+    ports:
+      - '${HONO_PORT}:${HONO_PORT}'
+    environment:
+      - HONO_PORT=${HONO_PORT}
+
+networks:
+  default:
+    name: benchmark

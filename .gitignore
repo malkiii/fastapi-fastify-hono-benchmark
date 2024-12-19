@@ -1,0 +1,38 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# Node files
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build files
+dist
+build
+
+# Python
+*.pyc
+*.pyo
+__pycache__
+venv
+env
+*.log
+*.tox
+*.coverage
+*.hypothesis
+
+# Local Environment files
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage
+
+# Logs
+*.log
+*.out
+*.err

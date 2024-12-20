@@ -20,6 +20,7 @@ services:
       - '${FASTAPI_PORT}:${FASTAPI_PORT}'
     environment:
       - FASTAPI_PORT=${FASTAPI_PORT}
+      - MONGODB_URI=${MONGODB_URI}
     depends_on:
       - mongodb
 
@@ -31,6 +32,7 @@ services:
       - '${FASTIFY_PORT}:${FASTIFY_PORT}'
     environment:
       - FASTIFY_PORT=${FASTIFY_PORT}
+      - MONGODB_URI=${MONGODB_URI}
     depends_on:
       - mongodb
 
@@ -42,6 +44,7 @@ services:
       - '${HONO_PORT}:${HONO_PORT}'
     environment:
       - HONO_PORT=${HONO_PORT}
+      - MONGODB_URI=${MONGODB_URI}
     depends_on:
       - mongodb
 

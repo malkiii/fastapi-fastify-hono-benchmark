@@ -5,7 +5,7 @@
   "prettier.printWidth": 100,
   "prettier.singleQuote": true,
   "prettier.arrowParens": "avoid",
-  "prettier.trailingComma": "none",
+  "prettier.trailingComma": "all",
   "prettier.quoteProps": "preserve",
   "prettier.semi": true,
   "[python]": {

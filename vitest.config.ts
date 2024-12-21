@@ -5,6 +5,6 @@ import 'dotenv/config';
 export default defineConfig({
   test: {
     env: process.env,
-    hookTimeout: 30 * 1000
-  }
+    hookTimeout: 30 * 1000,
+  },
 });

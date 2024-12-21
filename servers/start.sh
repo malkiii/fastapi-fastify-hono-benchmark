@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-clear && docker compose up --build
+docker compose up --build

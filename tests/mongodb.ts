@@ -22,7 +22,7 @@ export async function initializeMongodb() {
       // Generate 1000 random items
       const items = Array.from({ length: 1000 }, () => ({
         code: crypto.randomUUID(),
-        createdAt: Date.now()
+        createdAt: Date.now(),
       }));
 
       // Insert items into the collection

@@ -32,7 +32,7 @@ fastify.get('/items', async (request, reply) => {
 
   return {
     total: items.length,
-    items: items.map((item, index) => ({ id: index + 1, code: item.code }))
+    items: items.map((item, index) => ({ id: index + 1, code: item.code })),
   };
 });
 

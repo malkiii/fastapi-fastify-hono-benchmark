@@ -4,7 +4,7 @@ import { initializeMongodb } from './mongodb.js';
 const servers = {
   fastapi: `http://localhost:${process.env.FASTAPI_PORT}`,
   fastify: `http://localhost:${process.env.FASTIFY_PORT}`,
-  hono: `http://localhost:${process.env.HONO_PORT}`
+  hono: `http://localhost:${process.env.HONO_PORT}`,
 } as const;
 
 beforeAll(async () => {
@@ -22,9 +22,31 @@ describe('Check if the servers are running', () => {
       expect(response.status).toBe(200);
 
       // Returning the expected data
-      const data = await response.json();
+      const data = (await response.json()) as { name: string; status: string };
       expect(data.name).toBe(server);
       expect(data.status).toBe('OK');
     });
   }
 });
+
+type Item = { id: number; code: string };
+
+describe('Fetching items from the database', () => {
+  const limit = getRandomInt(1, 20);
+
+  for (const [server, url] of Object.entries(servers)) {
+    it(`should get ${limit} items from ${server}`, async () => {
+      const response = await fetch(`${url}/items?limit=${limit}`);
+      expect(response.status).toBe(200);
+
+      const data = (await response.json()) as { total: number; items: Item[] };
+      expect(data.total).toBe(limit);
+      expect(data.items[0]?.id).toBe(1);
+      expect(data.items[0]).toHaveProperty('code');
+    });
+  }
+});
+
+function getRandomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

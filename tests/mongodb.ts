@@ -1,9 +1,12 @@
 import { MongoClient } from 'mongodb';
 
-const MONGODB_URI = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@localhost:${process.env.MONGODB_PORT}`;
+const MONGODB_URI = new URL(process.env.MONGODB_URI!);
+
+// Use localhost for local dev environment
+MONGODB_URI.hostname = 'localhost';
 
 export async function initializeMongodb() {
-  const client = new MongoClient(MONGODB_URI);
+  const client = new MongoClient(MONGODB_URI.toString());
 
   try {
     // Connect to MongoDB

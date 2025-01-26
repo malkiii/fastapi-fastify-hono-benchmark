@@ -79,6 +79,29 @@ async function run() {
       ],
     });
 
+    await waitFor(5 * 1000);
+
+    spinner.text = `Sending POST requests to ${title} server with ${options.connections} connections...`;
+
+    const form = {
+      name: 'John Doe',
+      email: 'test@example.com',
+      password: '123456',
+    };
+
+    result['/signup'] = await autocannon({
+      title,
+      url,
+      ...options,
+      requests: [
+        {
+          method: 'POST',
+          path: '/signup',
+          body: JSON.stringify(form),
+        },
+      ],
+    });
+
     // write the results to a JSON file
     const outputFile = path.resolve(benchmarksDir, `${slug}.json`);
     fs.writeFileSync(outputFile, JSON.stringify(result, null, 2));

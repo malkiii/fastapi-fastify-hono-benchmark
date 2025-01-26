@@ -36,6 +36,13 @@ fastify.get('/items', async (request, reply) => {
   };
 });
 
+// Create a new user
+fastify.post('/signup', async (request, reply) => {
+  console.log('New User:', crypto.randomUUID());
+
+  return reply.code(302).send();
+});
+
 const start = async () => {
   try {
     await client.connect();

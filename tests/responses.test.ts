@@ -40,9 +40,31 @@ describe('Fetching items from the database', () => {
       expect(response.status).toBe(200);
 
       const data = (await response.json()) as { total: number; items: Item[] };
+
       expect(data.total).toBe(limit);
       expect(data.items[0]?.id).toBe(1);
       expect(data.items[0]).toHaveProperty('code');
+    });
+  }
+});
+
+describe('Handling POST requests', () => {
+  const form = new FormData();
+
+  form.append('name', 'John Doe');
+  form.append('email', 'test@example.com');
+  form.append('password', '123456');
+
+  for (const [server, url] of Object.entries(servers)) {
+    it(`should add an item to ${server}`, async () => {
+      const response = await fetch(`${url}/signup`, {
+        method: 'POST',
+        redirect: 'manual', // Prevent automatic redirection
+        body: JSON.stringify(Object.fromEntries(form)),
+      });
+
+      // check if it's a redirect response
+      expect(response.status).toBe(302);
     });
   }
 });

@@ -37,6 +37,15 @@ app.get('/items', async c => {
   });
 });
 
+// Create a new user
+app.post('/signup', async c => {
+  const formData = await c.req.parseBody();
+
+  console.log('New User:', crypto.randomUUID());
+
+  return c.text('', 302);
+});
+
 await client.connect();
 
 serve({ fetch: app.fetch, port: PORT }, () => {

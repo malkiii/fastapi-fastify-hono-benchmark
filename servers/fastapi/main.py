@@ -1,6 +1,8 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Request
+from fastapi.responses import Response
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from uuid import uuid4
 from time import time
 import os
 
@@ -53,6 +55,14 @@ async def get_items(limit: int = Query(default=10, ge=1)):
         "total": total,
         "items": new_items,
     }
+
+
+@app.post("/signup")
+async def signup(request: Request):
+    # Generate a new UUID
+    print("New User:", str(uuid4()))
+
+    return Response(status_code=302)
 
 
 if __name__ == "__main__":
